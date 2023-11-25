@@ -1,0 +1,14 @@
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\bin\Debug\net8.0\DummyClient.exe
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\bin\Debug\net8.0\DummyClient.deps.json
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\bin\Debug\net8.0\DummyClient.runtimeconfig.json
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\bin\Debug\net8.0\DummyClient.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\bin\Debug\net8.0\DummyClient.pdb
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.AssemblyInfoInputs.cache
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.AssemblyInfo.cs
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.csproj.CoreCompileInputs.cache
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\refint\DummyClient.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.pdb
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.genruntimeconfig.cache
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\DummyClient\obj\Debug\net8.0\ref\DummyClient.dll
