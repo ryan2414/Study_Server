@@ -1,0 +1,15 @@
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\bin\Release\net8.0\ServerCore.exe
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\bin\Release\net8.0\ServerCore.deps.json
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\bin\Release\net8.0\ServerCore.runtimeconfig.json
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\bin\Release\net8.0\ServerCore.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\bin\Release\net8.0\ServerCore.pdb
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.AssemblyInfo.cs
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.sourcelink.json
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\refint\ServerCore.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.pdb
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ServerCore.genruntimeconfig.cache
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Release\net8.0\ref\ServerCore.dll
