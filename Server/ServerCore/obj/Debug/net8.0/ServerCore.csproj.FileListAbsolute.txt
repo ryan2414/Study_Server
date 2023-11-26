@@ -12,3 +12,4 @@ C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Debug\net8.0\r
 C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.pdb
 C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.genruntimeconfig.cache
 C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Debug\net8.0\ref\ServerCore.dll
+C:\Users\jackp\OneDrive\문서\Study_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.sourcelink.json
