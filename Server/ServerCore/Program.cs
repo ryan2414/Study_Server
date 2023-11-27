@@ -3,42 +3,56 @@
     class Program
     {
         static int number = 0;
+        static object _obj = new object();
 
         static void Thread_1()
         {
-            // atomic = 원자성
-            // 더 이상 쪼개지면 안 되는 단위.
-
-            // 골드 -= 100;
-
-            // 서버다운
-
-            // 인벤 += 검;
-
             for (int i = 0; i < 1000000; i++)
             {
-                // All or Nothing
-                int afterValue = Interlocked.Increment(ref number);
+                // 상호배제 Mutual Exclusive
+                lock (_obj)
+                {
+                    number++;
+                }
 
-                //number++;
+                //try
+                //{
+                //    Monitor.Enter(_obj);
+                //    number++;
 
-                //int temp = number;
-                //temp += 1;
-                //number = temp;
+                //    return;
+                //}
+                //finally
+                //{
+                //    Monitor.Exit(_obj);
+                //}
+
+                // CriticalSection std:mutex
+                //Monitor.Enter(_obj); // 문을 잠그는 행위
+                //{
+                //    number++;
+
+                //}
+                //Monitor.Exit(_obj); // 잠금을 풀어준다.
             }
         }
+
+        // 데드락 DeadLock
 
         static void Thread_2()
         {
             for (int i = 0; i < 1000000; i++)
             {
-                Interlocked.Decrement(ref number);
+                lock (_obj)
+                {
+                    number--;
+                }
+                //Monitor.Enter(_obj);
 
                 //number--;
 
-                //int temp = number;
-                //temp += 1;
-                //number = temp;}
+                //Monitor.Exit(_obj);
+
             }
         }
 
