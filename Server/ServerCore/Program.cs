@@ -1,41 +1,57 @@
-﻿using System.Buffers;
-
-namespace ServerCore
+﻿namespace ServerCore
 {
-    // 메모리 배리어
-    // A) 코드 재배치 억제
-    // B) 가시성
-
-    // 1) *** Full Memory Barrier (ASM MFENCE, C# Thread.MemoryBarrier) : Store/Load 둘다 막는다.
-    // 2) Store Memory Barrier (ASM SFENCE) : Store만 막는다.
-    // 3) Load Memory Barrier (ASM LFENCE) : Load만 막는다.
-
     class Program
     {
-        int _answer;
-        bool _complete;
+        static int number = 0;
 
-        void A()
+        static void Thread_1()
         {
-            _answer = 123;
-            Thread.MemoryBarrier(); // Barrier 1
-            _complete = true;
-            Thread.MemoryBarrier(); // Barrier 2
+            // atomic = 원자성
+            // 더 이상 쪼개지면 안 되는 단위.
+
+            // 골드 -= 100;
+
+            // 서버다운
+
+            // 인벤 += 검;
+
+            for (int i = 0; i < 1000000; i++)
+            {
+                // All or Nothing
+                int afterValue = Interlocked.Increment(ref number);
+
+                //number++;
+
+                //int temp = number;
+                //temp += 1;
+                //number = temp;
+            }
         }
 
-        void B()
+        static void Thread_2()
         {
-            Thread.MemoryBarrier(); // Barrier 3
-            if ( _complete )
+            for (int i = 0; i < 1000000; i++)
             {
-                Thread.MemoryBarrier(); // Barrier 4
-                Console.WriteLine(_answer);
+                Interlocked.Decrement(ref number);
+
+                //number--;
+
+                //int temp = number;
+                //temp += 1;
+                //number = temp;}
             }
         }
 
         static void Main(string[] args)
         {
-            
+            Task t1 = new Task(Thread_1);
+            Task t2 = new Task(Thread_2);
+            t1.Start();
+            t2.Start();
+
+            Task.WaitAll(t1, t2);
+
+            Console.WriteLine(number);
         }
     }
 }
