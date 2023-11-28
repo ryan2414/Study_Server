@@ -1,19 +1,70 @@
 ﻿namespace ServerCore
 {
-    class Program
+    class FastLock
     {
-        static int number = 0;
-        static object _obj = new object();
+        public int id;
+    }
 
-        static void Thread_1()
+    internal class SessionManager
+    {
+        private FastLock l;
+        private static object _lock = new object();
+
+        public static void TestSession()
         {
-            for (int i = 0; i < 1000000; i++)
+            lock (_lock)
             {
+            }
+        }
+
+        public static void Test()
+        {
+            lock (_lock)
+            {
+                UserManager.TestUser();
+            }
+        }
+    }
+
+    internal class UserManager
+    {
+        private FastLock l;
+        private static object _lock = new Object();
+
+        public static void Test()
+        {
+            //Monitor.TryEnter()
+            lock (_lock)
+            {
+                SessionManager.TestSession();
+            }
+        }
+
+        public static void TestUser()
+        {
+            lock (_lock)
+            {
+            }
+        }
+    }
+
+    internal class Program
+    {
+        private static int number = 0;
+        private static object _obj = new object();
+        private static object _obj2 = new object();
+
+        private static void Thread_1()
+        {
+            for (int i = 0; i < 10000; i++)
+            {
+                SessionManager.Test();
+
                 // 상호배제 Mutual Exclusive
-                lock (_obj)
-                {
-                    number++;
-                }
+                //lock (_obj)
+                //{
+                //    number++;
+                //}
 
                 //try
                 //{
@@ -39,28 +90,31 @@
 
         // 데드락 DeadLock
 
-        static void Thread_2()
+        private static void Thread_2()
         {
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 10000; i++)
             {
-                lock (_obj)
-                {
-                    number--;
-                }
+                UserManager.Test();
+                //lock (_obj)
+                //{
+                //    number--;
+                //}
                 //Monitor.Enter(_obj);
 
                 //number--;
 
                 //Monitor.Exit(_obj);
-
             }
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Task t1 = new Task(Thread_1);
             Task t2 = new Task(Thread_2);
             t1.Start();
+
+            Thread.Sleep(100);
+
             t2.Start();
 
             Task.WaitAll(t1, t2);
