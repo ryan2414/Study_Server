@@ -1,35 +1,23 @@
 ﻿namespace ServerCore
 {
-    class Lock
-    {
-        // bool <- 커널을 왔다갔다 한다. <- 리소스 많이 먹음 
-        //AutoResetEvent _available = new AutoResetEvent(true);
-        ManualResetEvent _available = new ManualResetEvent(true); 
-
-        public void Acquire()
-        {
-            _available.WaitOne(); // 입장 시도(AutoResetEvent 자동으로 문을 닫는다.)
-            _available.Reset(); // 문을 닫는다
-        }
-
-        public void Release()
-        {
-            _available.Set(); // flag = true // 문을 열어준다.
-        }
-    }
-
+  
     internal class Program
     {
         private static int _num = 0;
-        static Lock _lock = new Lock();
+
+        // AutoResetEvent 보다 좀더 많은 정보를 가지고 있음.
+        // ex)
+        // counting 몇번 잠겄는지
+        // thread id 등
+        static Mutex _lock = new Mutex(); // 커널 동기화 객체 
 
         static void Thread_1()
         {
             for (int i = 0; i < 100000; i++)
             {
-                _lock.Acquire();
+                _lock.WaitOne();
                 _num++;
-                _lock.Release();
+                _lock.ReleaseMutex();
             }
         }
 
@@ -37,9 +25,9 @@
         {
             for (int i = 0; i < 100000; i++)
             {
-                _lock.Acquire();
+                _lock.WaitOne();
                 _num--;
-                _lock.Release();
+                _lock.ReleaseMutex();
             }
         }
 
