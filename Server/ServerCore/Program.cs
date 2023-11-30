@@ -3,44 +3,61 @@
   
     internal class Program
     {
-        private static int _num = 0;
+        // 1. 근성 
+        // 2. 양보
+        // 3. 갑질
 
-        // AutoResetEvent 보다 좀더 많은 정보를 가지고 있음.
-        // ex)
-        // counting 몇번 잠겄는지
-        // thread id 등
-        static Mutex _lock = new Mutex(); // 커널 동기화 객체 
+            // 상호배제
+            // Monitor
+        private static object _lock = new object();
+        private static SpinLock _lock2 = new SpinLock();// <= 1번과 2번의 혼합 형태
+        private static Mutex _lock3 = new Mutex();
+        // 직접 만든다.
 
-        static void Thread_1()
+
+        // RWLock ReaderWriterLock
+        static ReaderWriterLockSlim _lock4 = new ReaderWriterLockSlim();
+
+
+        class Reward
         {
-            for (int i = 0; i < 100000; i++)
-            {
-                _lock.WaitOne();
-                _num++;
-                _lock.ReleaseMutex();
-            }
+            
         }
 
-        static void Thread_2()
+        static Reward GetRewardById(int id)
         {
-            for (int i = 0; i < 100000; i++)
-            {
-                _lock.WaitOne();
-                _num--;
-                _lock.ReleaseMutex();
-            }
+            _lock4.EnterReadLock();
+
+            _lock4.ExitReadLock();
+
+            return null;
+        }
+
+        void AddReward(Reward reward)
+        {
+            _lock4.EnterWriteLock();
+
+            _lock4.ExitWriteLock();
         }
 
         private static void Main(string[] args)
         {
-            Task t1 = new Task(Thread_1);
-            Task t2 = new Task(Thread_2);
-            t1.Start();
-            t2.Start();
+            lock (_lock)
+            {
+                
+            }   
+            
+            bool lockTaken = false;
+            try
+            {
+                _lock2.Enter(ref lockTaken);
+            }
+            finally
+            {
+                if (lockTaken)
+                    _lock2.Exit();
+            }
 
-            Task.WaitAll(t1, t2);
-
-            Console.WriteLine(_num);
         }
     }
 }
