@@ -1,63 +1,41 @@
 ﻿namespace ServerCore
 {
-  
-    internal class Program
+    class Program
     {
-        // 1. 근성 
-        // 2. 양보
-        // 3. 갑질
+        private static volatile int count = 0;
+        private static Lock _lock = new Lock();
 
-            // 상호배제
-            // Monitor
-        private static object _lock = new object();
-        private static SpinLock _lock2 = new SpinLock();// <= 1번과 2번의 혼합 형태
-        private static Mutex _lock3 = new Mutex();
-        // 직접 만든다.
-
-
-        // RWLock ReaderWriterLock
-        static ReaderWriterLockSlim _lock4 = new ReaderWriterLockSlim();
-
-
-        class Reward
+        static void Main(string[] args)
         {
-            
-        }
-
-        static Reward GetRewardById(int id)
-        {
-            _lock4.EnterReadLock();
-
-            _lock4.ExitReadLock();
-
-            return null;
-        }
-
-        void AddReward(Reward reward)
-        {
-            _lock4.EnterWriteLock();
-
-            _lock4.ExitWriteLock();
-        }
-
-        private static void Main(string[] args)
-        {
-            lock (_lock)
+            Task t1 = new Task(delegate()
             {
-                
-            }   
-            
-            bool lockTaken = false;
-            try
-            {
-                _lock2.Enter(ref lockTaken);
-            }
-            finally
-            {
-                if (lockTaken)
-                    _lock2.Exit();
-            }
+                for (int i = 0; i < 100000; i++)
+                {
+                    _lock.WriteLock();
+                    _lock.WriteLock();
+                    count++;
+                    _lock.WriteUnlock();
+                    _lock.WriteUnlock();
 
+                }
+            });
+
+            Task t2 = new Task(delegate ()
+            {
+                for (int i = 0; i < 100000; i++)
+                {
+                    _lock.WriteLock();
+                    count--;
+                    _lock.WriteUnlock();
+                }
+            });
+
+            t1.Start();
+            t2.Start();
+
+            Task.WaitAll(t1, t2);
+
+            Console.WriteLine(count);
         }
     }
 }
